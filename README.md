@@ -1,2 +1,2 @@
-# The-Survey-Corps
+# Manguiz
 Our web project for Hacktoon
