@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Manguiz",
+  "name": "Manguiz: A Japanese phrase quiz",
   "icons": [
     {
       "src": "favicon.ico",
