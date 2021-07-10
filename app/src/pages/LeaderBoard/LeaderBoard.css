@@ -1,0 +1,18 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:400,700';
+
+body {
+	background: #EEEEEE;
+}
+
+.leaderboard {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	height: 100vh;
+}
+
+.body {
+	height: 300px;
+	display: block;
+	overflow-y: auto;
+}
