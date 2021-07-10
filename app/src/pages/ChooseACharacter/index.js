@@ -70,7 +70,7 @@ const ChooseACharacter = () => {
       </CharacterGrid>
       <SelectFormat>
         {photo ? <img src={photo.image} width="auto" height="180" /> : ""}
-        {error && <span style={{color: "red"}}> Please choose an identity. </span>}
+        {error && <span style={{color: "red"}}> Please choose a new identity. </span>}
       </SelectFormat>
       <SelectFormat>
         <button
