@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 import "./LeaderBoard.css";
 import LeaderRow from "../../components/LeaderRow/LeaderRow";
+import firebase from "../../firebase";
 
 const LeaderBoard = () => {
   const [leaders, setLeaders] = useState(null);
 
   useEffect(() => {
-    fetch("/leaders")
-      .then((res) => res.json())
-      
-      .then((data) => setLeaders(data));
+    firebase
+      .firestore()
+      .collection("leaders")
+      .onSnapshot((snapshot) => {
+        const newLeaders = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+
+        setLeaders(newLeaders)
+      });
   });
 
   return (

@@ -1,4 +1,3 @@
-
 function SignUpPage() {
   return (
     <div>
