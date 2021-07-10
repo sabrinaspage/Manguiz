@@ -8,7 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const ChooseACharacter = () => {
   const [characters, setCharacters] = useState(null);
-  const [photo, setPhoto] = useState({});
+  const [photo, setPhoto] = useState(null);
+  const [error, setError] = useState('');
   const history = useHistory();
 
   var user = firebase.auth().currentUser;
@@ -30,11 +31,15 @@ const ChooseACharacter = () => {
       user.updateProfile({
         photoURL: photo.image,
       });
-      console.log(user.photoURL)
+      console.log(user.photoURL);
     }
   }, [photo]);
 
   const handlePageChange = () => {
+    if (!photo) {
+      setError("Please select a character");
+      return;
+    }
     if (user && user.photoURL !== null) {
       history.push("/game");
     }
@@ -55,7 +60,10 @@ const ChooseACharacter = () => {
               <CharacterCard
                 key={i.id}
                 character={i}
-                onClick={() => setPhoto(i)}
+                onClick={() => {
+                  setPhoto(i);
+                  setError("");
+                }}
               />
             ))
           : "Loading..."}
@@ -65,13 +73,22 @@ const ChooseACharacter = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          paddingTop: "20px",
+          margin: "4px",
         }}
       >
-        {user ? <img src={photo.image} width="10%" height="10%"/> : "Select an image"}
+        {photo ? <img src={photo.image} width="auto" height="180" /> : ""}
+        {error && <span color="red"> Please choose an identity. </span>}
+      </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <button
           type="button"
-          className="btn btn-light btn-xl"
+          className="btn btn-outline-primary"
           onClick={handlePageChange}
         >
           Confirm selection
