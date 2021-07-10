@@ -6,7 +6,9 @@ export const CharacterGrid = ({ children }) => {
       className="d-flex align-items-center justify-content-center"
       style={{ minWidth: "100%", minHeight: "40vh" }}
     >
-      <div className="row">{children}</div>
+      <div className="row" style={{
+        columnGap: '10px',
+      }}>{children}</div>
     </div>
   );
 };

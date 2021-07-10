@@ -12,9 +12,7 @@ export default function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password).then((res) => {
-      console.log("User account created & asignd int!", res);
-    });
+    return auth.createUserWithEmailAndPassword(email, password)
   }
 
   function login(email, password) {

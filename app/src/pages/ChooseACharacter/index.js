@@ -65,6 +65,7 @@ const ChooseACharacter = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          paddingTop: "20px",
         }}
       >
         {user ? <img src={photo.image} width="10%" height="10%"/> : "Select an image"}

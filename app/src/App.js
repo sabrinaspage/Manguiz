@@ -6,6 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
+import LogInPage from "./pages/LogInPage";
 import LeaderBoard from "./pages/LeaderBoard/index";
 import ChooseACharacter from "./pages/ChooseACharacter/index";
 import Game from "./game"
@@ -16,6 +17,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact component={SignUpPage} path="/"/>
+        <Route exact component={LogInPage} path="/login"/>
         <Route exact component={ChooseACharacter} path="/choose-a-character"/>
         <Route exact component={Game} path="/game"/>
         <Route exact component={LeaderBoard} path="/leaderboard"/>
