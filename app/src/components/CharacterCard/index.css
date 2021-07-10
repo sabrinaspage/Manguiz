@@ -11,15 +11,6 @@
 
 /* The Transformation */
 .img-hover-zoom--quick-zoom:hover img {
-  transform: scale(1.2, 1.2);
+  transform: scale(1.1, 1.1);
   background-color: rgba(248, 247, 216, 0.7);
-}
-
-.text {
-    color: transparent;
-    transition: color 0.55s;
-}
-
-.text:hover {
-    color: black;
 }

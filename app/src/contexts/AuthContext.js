@@ -14,10 +14,6 @@ export default function AuthProvider({ children }) {
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password).then((res) => {
       console.log("User account created & asignd int!", res);
-      res.user.updateProfile({
-        displayName: "Person",
-        photoURL: "image",
-      });
     });
   }
 
