@@ -6,13 +6,15 @@ import {
   Switch,
 } from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
-import LeaderBoard from "./pages/LeaderBoard/LeaderBoard";
+import LeaderBoard from "./pages/LeaderBoard/index";
+import ChooseACharacter from "./pages/ChooseACharacter/index";
 
 const App = () => {
   return (
     <Router>
       <Switch>
         <Route exact component={SignUpPage} path="/"/>
+        <Route exact component={ChooseACharacter} path="/choose-a-character"/>
         <Route exact component={LeaderBoard} path="/leaderboard"/>
       </Switch>
     </Router>

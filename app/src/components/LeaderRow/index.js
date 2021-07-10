@@ -1,4 +1,4 @@
-import "./LeaderRow.css";
+import "./index.css";
 
 const validURL = (str) => {
   var pattern = new RegExp(
@@ -20,7 +20,7 @@ const LeaderImage = ({ avatar }) => {
 const LeaderRow = ({ person }) => {
   return (
     <tr id="row">
-      <td width={100} className="place"> {person.place} </td>
+      <td width={30} className="place"> {person.place} </td>
       <td width={100} className="avatar"> <LeaderImage avatar={person.avatar} /> </td>
       <td width={100} className="name"> {person.name} </td>
       <td width={100} className="points"> {person.points} </td>
