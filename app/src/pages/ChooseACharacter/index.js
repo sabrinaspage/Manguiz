@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const ChooseACharacter = () => {
   const [characters, setCharacters] = useState(null);
   const [photo, setPhoto] = useState(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const history = useHistory();
 
   var user = firebase.auth().currentUser;
@@ -68,24 +68,11 @@ const ChooseACharacter = () => {
             ))
           : "Loading..."}
       </CharacterGrid>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "4px",
-        }}
-      >
+      <SelectFormat>
         {photo ? <img src={photo.image} width="auto" height="180" /> : ""}
-        {error && <span color="red"> Please choose an identity. </span>}
-      </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+        {error && <span style={{color: "red"}}> Please choose an identity. </span>}
+      </SelectFormat>
+      <SelectFormat>
         <button
           type="button"
           className="btn btn-outline-primary"
@@ -93,7 +80,21 @@ const ChooseACharacter = () => {
         >
           Confirm selection
         </button>
-      </div>
+      </SelectFormat>
+    </div>
+  );
+};
+
+const SelectFormat = ({ children }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      { children }
     </div>
   );
 };
