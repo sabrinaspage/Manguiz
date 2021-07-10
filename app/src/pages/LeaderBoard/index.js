@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "./LeaderBoard.css";
-import LeaderRow from "../../components/LeaderRow/LeaderRow";
+import "./index.css";
+import LeaderRow from "../../components/LeaderRow/index";
 import firebase from "../../firebase";
 
 const LeaderBoard = () => {
