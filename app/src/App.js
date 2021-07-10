@@ -6,9 +6,9 @@ import {
   Switch,
 } from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
-import LeaderBoard from "./pages/LeaderBoard";
+import LeaderBoard from "./pages/LeaderBoard/LeaderBoard";
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Switch>
