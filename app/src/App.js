@@ -8,6 +8,7 @@ import {
 import SignUpPage from "./pages/SignUpPage";
 import LeaderBoard from "./pages/LeaderBoard/index";
 import ChooseACharacter from "./pages/ChooseACharacter/index";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   return (

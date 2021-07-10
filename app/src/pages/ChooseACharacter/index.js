@@ -1,10 +1,25 @@
 import React from "react";
-import { CharacterCard, CharacterGrid } from "../../components/CharacterGrid/index";
-import firebase from "../../firebase";
+import { CharacterGrid } from "../../components/CharacterGrid/index";
+import { CharacterCard } from "../../components/CharacterCard/index";
+import firebase, { storage } from "../../firebase";
 import { useEffect, useState } from "react";
 
 const ChooseACharacter = () => {
   const [characters, setCharacters] = useState(null);
+  const [image, setImage] = useState({});
+  const [url, setUrl] = useState({});
+
+
+  const handleFireBaseUpload = e => {
+    e.preventDefault();
+    const ref = storage.ref(imageAsURL);
+    const uploadTask = ref.put(image)
+    uploadTask.on("state_changed", console.log, console.error, () => {
+      ref.getDownloadURL().then((url) => {
+        setUrl(url)
+      })
+    })
+  }
 
   useEffect(() => {
     firebase
@@ -18,14 +33,19 @@ const ChooseACharacter = () => {
 
         setCharacters(newCharacters);
       });
-  });
+
+    console.log(imageAsURL);
+  }, [imageAsURL]);
 
   return (
-    <CharacterGrid>
+    <>
+    <h1 className="display-3 text-center"> Choose a Character </h1>
+      <CharacterGrid>
         {characters
-          ? characters.map((i) => <CharacterCard character={i} />)
+          ? characters.map((i) => <CharacterCard character={i} onClick={() => setImage(i)}/>)
           : "Loading..."}
-    </CharacterGrid>
+      </CharacterGrid>
+    </>
   );
 };
 

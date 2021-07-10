@@ -1,0 +1,25 @@
+.img-hover-zoom {
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
+}
+
+.img-hover-zoom--quick-zoom img {
+  transform-origin: center center;
+  transition: transform 0.55s, background-color 0.55s, visibility 0.55s ease-in;
+}
+
+/* The Transformation */
+.img-hover-zoom--quick-zoom:hover img {
+  transform: scale(1.2, 1.2);
+  background-color: rgba(248, 247, 216, 0.7);
+}
+
+.text {
+    color: transparent;
+    transition: color 0.55s;
+}
+
+.text:hover {
+    color: black;
+}
