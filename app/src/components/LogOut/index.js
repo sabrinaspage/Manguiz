@@ -1,10 +1,12 @@
 import { Button } from "bootstrap";
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import { useHistory } from "react-router";
 
 const LogOut = () => {
   const { currentUser, logout } = useAuth();
   const history = useHistory();
+  const [error, setError] = useState("");
 
   async function handleLogout() {
     setError("");
@@ -17,7 +19,14 @@ const LogOut = () => {
     }
   }
 
-  return <Button variant="link" onClick={handleLogout}>Log Out</Button>;
+  return (
+    <>
+      <Button variant="link" onClick={handleLogout}>
+        Log Out
+      </Button>
+      {error && <span style={{color: "red"}}> {error} </span>}
+    </>
+  );
 };
 
 export default LogOut;

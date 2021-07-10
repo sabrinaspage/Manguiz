@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./index.css";
 import LeaderRow from "../../components/LeaderRow/index";
+import LogOut from "../../components/LogOut/index"
 import firebase from "../../firebase";
 
 const LeaderBoard = () => {

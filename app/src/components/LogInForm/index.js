@@ -1,29 +1,29 @@
-import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../../contexts/AuthContext"
-import { useHistory, Link } from "react-router-dom"
+import React, { useRef, useState } from "react";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { useAuth } from "../../contexts/AuthContext";
+import { useHistory, Link } from "react-router-dom";
 
 export default function LogInForm() {
-  const emailRef = useRef()
-  const passwordRef = useRef()
-  const { login } = useAuth()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const history = useHistory()
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      setError("")
-      setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/game")
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      history.push("/game");
     } catch {
-      setError("Failed to login")
+      setError("Failed to login");
     }
 
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
@@ -41,9 +41,11 @@ export default function LogInForm() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
-              Log In
-            </Button>
+            <div style={{ paddingTop: "20px" }}>
+              <Button disabled={loading} className="w-100" type="submit">
+                Log In
+              </Button>
+            </div>
           </Form>
         </Card.Body>
       </Card>
@@ -51,5 +53,5 @@ export default function LogInForm() {
         Don't have an account? <Link to="/">Sign Up</Link>
       </div>
     </>
-  )
+  );
 }

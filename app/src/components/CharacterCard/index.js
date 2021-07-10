@@ -3,7 +3,7 @@ import "./index.css";
 
 export const CharacterCard = ({ character, onClick, selected }) => {
   return (
-    <div className="col card d-flex align-items-center justify-content-center" onClick={onClick}>
+    <div className="col character-card d-flex align-items-center justify-content-center" onClick={onClick}>
       <div className="img-hover-zoom img-hover-zoom--quick-zoom">
         <img src={character.image} alt="" width="100%" height="100%" />
       </div>
