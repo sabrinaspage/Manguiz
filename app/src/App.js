@@ -8,6 +8,7 @@ import {
 import SignUpPage from "./pages/SignUpPage";
 import LeaderBoard from "./pages/LeaderBoard/index";
 import ChooseACharacter from "./pages/ChooseACharacter/index";
+import Game from "./game"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
       <Switch>
         <Route exact component={SignUpPage} path="/"/>
         <Route exact component={ChooseACharacter} path="/choose-a-character"/>
+        <Route exact component={Game} path="/game"/>
         <Route exact component={LeaderBoard} path="/leaderboard"/>
       </Switch>
     </Router>
