@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CharacterCard = ({ character }) => {
+export const CharacterGrid = ({ character }) => {
   return (
     <div class="">
       <img class="" src={character.image} alt="" />

@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterCard } from "../../components/CharacterCard/index";
+import { CharacterCard, CharacterGrid } from "../../components/CharacterGrid/index";
 import firebase from "../../firebase";
 import { useEffect, useState } from "react";
 
@@ -21,11 +21,11 @@ const ChooseACharacter = () => {
   });
 
   return (
-    <div>
+    <CharacterGrid>
         {characters
           ? characters.map((i) => <CharacterCard character={i} />)
           : "Loading..."}
-    </div>
+    </CharacterGrid>
   );
 };
 
