@@ -1,51 +1,125 @@
 #root {
-    height: 100vh;
+  height: 100vh;
+}
+
+.Start {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20%;
+}
+
+.welcome-box {
+  width: 50%;
+  font-size: 2em;
+  text-align: center;
+  border-radius: 30px;
+  border: 4px dashed lightgray;
+  padding: 5%;
+}
+
+.welcome-box p {
+  margin-bottom: 5%;
+}
+
+.finish-box {
+  width: 50%;
+  font-size: 1.2em;
+  text-align: center;
+  border-radius: 30px;
+  border: 4px dashed lightgray;
+  padding: 3%;
+}
+.finish-box h1 {
+    font-size: 2.5em;
+    margin-bottom: 2.5%;
+}
+.scores {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 2.5%;
+}
+.corrects {
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    color: hsl(120, 100%, 84%);
+}
+.incorrects {
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    color: hsl(0, 100%, 84%);
 }
 
 .Game {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .question-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
 }
 
 .drawing-box {
-    width:50%;
-    max-height: 80%;
-    display: flex;
-    justify-content: right;
+  width: 50%;
+  max-height: 80%;
+  display: flex;
+  justify-content: right;
 }
 .drawing-box img {
-    object-fit: scale-down;
+  object-fit: scale-down;
 }
 
 .question-box {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    padding: 10%;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 10%;
 }
 
 .japanese-text {
-    text-align: center;
-    padding: 5%;
-    margin-bottom: 5%;
-    border-radius: 30px;
-    border: 4px dashed lightgray;
+  text-align: center;
+  padding: 5%;
+  margin-bottom: 5%;
+  border-radius: 30px;
+  border: 4px dashed lightgray;
 }
 
 .kana {
-    font-size: 4em;
+  font-size: 4em;
 }
 .pronunciation {
-    font-size: 2em;
-    color: darkgrey;
+  font-size: 2em;
+  color: darkgrey;
 }
 
+.progbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.prog {
+  height: 4px;
+  margin: 5px;
+  flex-grow: 4;
+}
+
+.unanswered {
+  background-color: hsl(0, 0%, 83%);
+}
+.right {
+  background-color: hsl(120, 100%, 84%);
+}
+.wrong {
+  background-color: hsl(0, 100%, 84%);
+}
