@@ -10,6 +10,7 @@ import {
   ScoreCounter,
   TitleCard,
   LeaderboardPos,
+  NewCharacterCard,
 } from "../../components/Account/cardCollection";
 import UserSection from "../../components/Account/userSection";
 
@@ -35,6 +36,7 @@ function AccountPage() {
               <TitleCard userTitle="Hokage" />
               <ScoreCounter correct={20} incorrect={20} />
               <LeaderboardPos rank={30} />
+              <NewCharacterCard url="/choose-a-character" />
             </CardCollection>
             <div className="character-image">
               <img

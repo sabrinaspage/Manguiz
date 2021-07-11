@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export function CardCollection(props) {
   return <div className="card-collection">{props.children}</div>;
@@ -39,7 +40,15 @@ export function LeaderboardPos(props) {
   return (
     <div className="card-box">
       <h2>Rank:</h2>
-      <h3>{"#"+props.rank}</h3>
+      <h3>{"#" + props.rank}</h3>
+    </div>
+  );
+}
+
+export function NewCharacterCard(props) {
+  return (
+    <div className="card-box">
+      <Link to={props.url}>Choose a New Character</Link>
     </div>
   );
 }
