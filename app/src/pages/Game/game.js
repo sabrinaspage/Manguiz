@@ -297,6 +297,7 @@ function EndPage(props) {
           onClick={(e) => {
             window.location.reload(e);
           }}
+          style={{ marginLeft: 20 }}
           variant="outline-primary"
           size="md"
         >
