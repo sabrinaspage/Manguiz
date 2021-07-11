@@ -53,7 +53,7 @@ function AccountPage() {
             <CardCollection>
               <TitleCard userTitle={name} />
               <ScoreCounter correct={correct} incorrect={incorrect} />
-              <LeaderboardPos rank={30} />
+              <LeaderboardPos rank={3} />
               <NewCharacterCard url="/choose-a-character" />
             </CardCollection>
             <div className="character-image">
