@@ -1,9 +1,13 @@
 import React, { Component, useState, useEffect } from "react";
-import "./styles/game.css";
+import "./game.css";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
-import firebase, { db } from "./firebase";
+import firebase, { db } from "../../firebase";
 import { useHistory } from "react-router-dom";
+
+// game components
+import KanaDisplay from "../../components/Game/kanaDisplay";
+import AnswerChoices from "../../components/Game/answerChoices";
 
 class Game extends Component {
   /* 
@@ -17,8 +21,6 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.nextStep = this.nextStep.bind(this);
-    this.correctIncrement = this.correctIncrement.bind(this);
-    this.incorrectIncrement = this.incorrectIncrement.bind(this);
     this.startGame = this.startGame.bind(this);
     this.endGame = this.endGame.bind(this);
 
@@ -73,6 +75,8 @@ class Game extends Component {
 
     temparray.splice(Math.floor(Math.random() * 5), 1);
 
+    const choicesarray = temparray.map((x) => questionText[x]);
+
     this.state = {
       current_image:
         "https://st4.depositphotos.com/20363444/23767/i/1600/depositphotos_237673462-stock-photo-handsome-happy-young-man-waving.jpg",
@@ -81,62 +85,68 @@ class Game extends Component {
       incorrect: 0,
       answer_history: Array(question_count).fill("unanswered"),
       translation_number: 0,
-      current_choices: temparray,
-      correct_choice: Math.floor(Math.random() * 4),
+      current_choices: choicesarray,
+      correct_choice: choicesarray[Math.floor(Math.random() * 4)],
 
       quiz_begun: false,
       quiz_complete: false,
     };
   }
 
-  nextStep() {
-    if (this.state.translation_number === 10) {
-      this.endGame();
-    } else {
-      const answerCount = this.state.questions.length;
+  // Most of the confusing logic has been moved into nextStep; I've removed around 4 functions
+  nextStep(correct) {
+    // generate new answer choices
+    const answerCount = this.state.questions.length;
 
-      let temparray = [];
+    let temparray = [];
 
-      let i = 0;
+    let i = 0;
 
-      while (temparray.length < 5) {
-        let newans = Math.floor(Math.random() * answerCount);
-        if (temparray.indexOf(newans) === -1) {
-          temparray.push(newans);
-        }
+    while (temparray.length < 5) {
+      let newans = Math.floor(Math.random() * answerCount);
+      if (temparray.indexOf(newans) === -1) {
+        temparray.push(newans);
       }
+    }
 
-      temparray.splice(Math.floor(Math.random() * 5), 1);
+    temparray.splice(Math.floor(Math.random() * 5), 1);
 
-      this.setState({
-        current_choices: temparray,
-        correct_choice: Math.floor(Math.random() * 4),
+    const choicesarray = temparray.map((x) => this.state.questions[x]);
+
+    // data for the progress bar at the top
+    const temphistory = this.state.answer_history.slice();
+    temphistory.splice(
+      this.state.translation_number,
+      1,
+      correct ? "right" : "wrong"
+    );
+
+
+    // Update state, check if game is complete.
+    if (correct) {
+      this.setState((state) => {
+        return {
+          correct: state.correct + 1,
+          translation_number: state.translation_number + 1,
+          current_choices: choicesarray,
+          correct_choice: choicesarray[Math.floor(Math.random() * 4)],
+          answer_history: temphistory,
+        };
+      });
+    } else {
+      this.setState((state) => {
+        return {
+          incorrect: state.incorrect + 1,
+          translation_number: state.translation_number + 1,
+          current_choices: choicesarray,
+          correct_choice: choicesarray[Math.floor(Math.random() * 4)],
+          answer_history: temphistory,
+        };
       });
     }
-  }
-
-  correctIncrement() {
-    const temparray = this.state.answer_history.slice();
-    const tempcorrect = this.state.correct + 1;
-    const temptranslation_number = this.state.translation_number + 1;
-    temparray.splice(this.state.translation_number, 1, "right");
-    this.setState({
-      correct: tempcorrect,
-      answer_history: temparray,
-      translation_number: temptranslation_number,
-    });
-  }
-
-  incorrectIncrement() {
-    const temparray = this.state.answer_history.slice();
-    const tempincorrect = this.state.incorrect + 1;
-    const temptranslation_number = this.state.translation_number + 1;
-    temparray.splice(this.state.translation_number, 1, "wrong");
-    this.setState({
-      incorrect: tempincorrect,
-      answer_history: temparray,
-      translation_number: temptranslation_number,
-    });
+    if (this.state.translation_number === 10) {
+      this.endGame();
+    }
   }
 
   startGame() {
@@ -152,15 +162,13 @@ class Game extends Component {
     });
   }
 
-  componentDidMount() {}
-
   render() {
-    console.log(this.state.answer_history);
     // unanswered, right, wrong
     const progresstracker = this.state.answer_history.map((value) => (
       <div className={"prog " + value}>&nbsp;</div>
     ));
 
+    // Start screen
     if (!this.state.quiz_begun && !this.state.quiz_complete) {
       return (
         <div className="Game">
@@ -168,6 +176,7 @@ class Game extends Component {
         </div>
       );
     } else if (this.state.quiz_complete) {
+      // Showing endcard
       return (
         <div className="Game">
           <EndPage
@@ -178,6 +187,7 @@ class Game extends Component {
         </div>
       );
     } else {
+      // Playing the game
       return (
         <div className="Game">
           <div className="progbar">{progresstracker}</div>
@@ -185,92 +195,22 @@ class Game extends Component {
             <div className="drawing-box">
               <img src={this.state.current_image} alt="" />
             </div>
-            <QuestionBox
-              choices={this.state.current_choices}
-              answer={this.state.correct_choice}
-              questionText={this.state.questions}
-              nextQuestion={this.nextStep}
-              correct={this.correctIncrement}
-              incorrect={this.incorrectIncrement}
-            />
+            <div className="question-box">
+              <KanaDisplay
+                kana={this.state.correct_choice[2]}
+                text={this.state.correct_choice[1]}
+              />
+              <AnswerChoices
+                correct={this.state.correct_choice}
+                choices={this.state.current_choices}
+                signalNext={this.nextStep}
+              />
+            </div>
           </div>
         </div>
       );
     }
   }
-}
-
-function QuestionBox(props) {
-  const [incorrect, highlightIncorrect] = useState("outline-dark");
-  const [correct, highlightCorrect] = useState("outline-dark");
-  const [waiting, toggleWait] = useState(false);
-  const waitTime = 500;
-
-  const answerChoices = props.choices.map(
-    (choice) => props.questionText[choice]
-  );
-
-  const sleep = (milliseconds) => {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds));
-  };
-
-  const signalNext = props.nextQuestion;
-
-  const answerSelected = (correct) => {
-    if (waiting) {
-      return;
-    }
-
-    toggleWait(true);
-    highlightCorrect("success");
-    highlightIncorrect("danger");
-    sleep(waitTime).then(function () {
-      highlightCorrect("outline-dark");
-      highlightIncorrect("outline-dark");
-      signalNext();
-      toggleWait(false);
-    });
-  };
-
-  const updateScore = (correct) => {
-    if (correct) {
-      props.correct();
-    } else {
-      props.incorrect();
-    }
-  };
-
-  const answerButtons = answerChoices.map((choice) => (
-    <Button
-      key={choice[0]}
-      onClick={() => {
-        updateScore(
-          answerChoices.indexOf(choice) === props.answer ? true : false
-        );
-        answerSelected(
-          answerChoices.indexOf(choice) === props.answer ? true : false
-        );
-      }}
-      variant={
-        answerChoices.indexOf(choice) === props.answer ? correct : incorrect
-      }
-      size="lg"
-      block
-    >
-      {choice[0]}
-    </Button>
-  ));
-
-  return (
-    <div className="question-box">
-      <div className="japanese-text">
-        <span className="kana">{answerChoices[props.answer][2]}</span>
-        <br />
-        <span className="pronunciation">{answerChoices[props.answer][1]}</span>
-      </div>
-      <div className="answer-choices">{answerButtons}</div>
-    </div>
-  );
 }
 
 function StartPage(props) {
@@ -322,13 +262,10 @@ function EndPage(props) {
     console.log(user);
 
     if (user) {
-      db
-        .collection("user-points")
-        .doc(user.uid)
-        .update({
-          correct: props.correct,
-          incorrect: props.incorrect,
-        });
+      db.collection("user-points").doc(user.uid).update({
+        correct: props.correct,
+        incorrect: props.incorrect,
+      });
     }
   }, [props]);
 
@@ -360,6 +297,7 @@ function EndPage(props) {
           onClick={(e) => {
             window.location.reload(e);
           }}
+          style={{ marginLeft: 20 }}
           variant="outline-primary"
           size="md"
         >
