@@ -17,4 +17,9 @@
 #row {
   font-weight: 300;
   font-size: large;
+  transition: background 0.25s,
+}
+
+#row:hover {
+  background: rgb(235, 231, 231)  ;
 }
