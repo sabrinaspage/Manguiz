@@ -86,7 +86,11 @@
   padding: 10%;
 }
 
-
+.answer-choices {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
 .kana {
   font-size: 4em;
