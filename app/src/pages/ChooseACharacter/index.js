@@ -4,6 +4,7 @@ import { CharacterCard } from "../../components/CharacterCard/index";
 import firebase from "../../firebase";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import NaviBar from "../../components/NaviBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ChooseACharacter = () => {
@@ -46,6 +47,8 @@ const ChooseACharacter = () => {
   };
 
   return (
+    <>
+    <NaviBar />
     <div
       style={{
         display: "block",
@@ -82,6 +85,7 @@ const ChooseACharacter = () => {
         </button>
       </SelectFormat>
     </div>
+    </>
   );
 };
 
