@@ -1,5 +1,7 @@
 # Manguiz
 
+https://www.youtube.com/watch?v=qL9M9t4oR9c (Youtube link)
+
 **Originality**:
 The concept is somewhat simple, but the chances that this has been done before, specifically in a hackathon, are slim to none. We did take inspiration for the application from the UN’s freerice website; however, while that’s based more on finding English synonyms for English words, our hack has more of a focus on translation. So, pretty original, we’d say.
 
