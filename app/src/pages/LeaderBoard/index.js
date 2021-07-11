@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./index.css";
 import LeaderRow from "../../components/LeaderRow/index";
 import firebase from "../../firebase";
+import NaviBar from "../../components/NaviBar";
 
 const LeaderBoard = () => {
   const [leaders, setLeaders] = useState(null);
@@ -21,6 +22,8 @@ const LeaderBoard = () => {
   });
 
   return (
+    <>
+    <NaviBar />
     <div class="leaderboard">
       <h1>
         <span> Leaderboard </span>
@@ -37,6 +40,7 @@ const LeaderBoard = () => {
         "Loading"
       )}
     </div>
+    </>
   );
 };
 
