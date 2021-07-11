@@ -26,7 +26,7 @@ function NaviBar(props) {
     <Navbar bg="light" variant="light">
       <Navbar.Brand href="/dashboard">
         <div className="branding">
-          <div className="kana">
+          <div className="kana-navbar">
             {kanaTop}
             <br />
             {kanaBottom}
