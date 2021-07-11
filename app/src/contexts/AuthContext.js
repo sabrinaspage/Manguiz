@@ -11,12 +11,13 @@ export default function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
+  function signup(email, password, displayName) {
     return auth
       .createUserWithEmailAndPassword(email, password)
       .then((registeredUser) => {
         console.log(registeredUser.user);
         return db.collection("user-points").doc(registeredUser.user.uid).set({
+          displayName: displayName,
           correct: 0,
           incorrect: 0,
         });
