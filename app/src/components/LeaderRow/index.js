@@ -20,10 +20,8 @@ const LeaderImage = ({ avatar }) => {
 const LeaderRow = ({ person }) => {
   return (
     <tr id="row">
-      <td width={30} className="place"> {person.place} </td>
-      <td width={100} className="avatar"> <LeaderImage avatar={person.avatar} /> </td>
-      <td width={100} className="name"> {person.name} </td>
-      <td width={100} className="points"> {person.points} </td>
+      <td width={30} className="place"> {person.correct} </td>
+      <td width={100} className="points"> {person.incorrect} </td>
     </tr>
   );
 };

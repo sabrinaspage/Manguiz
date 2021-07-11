@@ -9,7 +9,7 @@ import SignUpPage from "./pages/SignUpPage";
 import LeaderBoard from "./pages/LeaderBoard/index";
 import ChooseACharacter from "./pages/ChooseACharacter/index";
 import LogInPage from "./pages/LogInPage";
-import Game from "./game"
+import Game from "./game";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
