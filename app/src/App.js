@@ -10,6 +10,7 @@ import LeaderBoard from "./pages/LeaderBoard/index";
 import ChooseACharacter from "./pages/ChooseACharacter/index";
 import LogInPage from "./pages/LogInPage";
 import Game from "./game"
+import Account from "./pages/Account/index";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact component={ChooseACharacter} path="/choose-a-character"/>
         <Route exact component={LogInPage} path="/login"/>
         <Route exact component={Game} path="/game"/>
+        <Route exact component={Account} path="/account"/>
         <Route exact component={LeaderBoard} path="/leaderboard"/>
       </Switch>
     </Router>
