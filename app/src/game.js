@@ -1,7 +1,9 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import "./styles/game.css";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
+import firebase, { db } from "./firebase";
+import { useHistory } from "react-router-dom";
 
 class Game extends Component {
   /* 
@@ -11,7 +13,7 @@ class Game extends Component {
 
     ["english", "japanese", "kana"]
 
-    */
+  */
   constructor(props) {
     super(props);
     this.nextStep = this.nextStep.bind(this);
@@ -297,6 +299,8 @@ function StartPage(props) {
 // Communicate with DB here, whether through a function, or
 // routing the user away
 function EndPage(props) {
+  const history = useHistory();
+
   let message = "Wow!";
   let submessage = "A placeholder!";
 
@@ -305,18 +309,33 @@ function EndPage(props) {
     submessage = "You got more right than wrong. Good work! 🎉";
   } else if (props.correct === props.incorrect) {
     message = "Good try.";
-    submessage = "Nothing's wrong with a little equality, but study more phrases. (Watching anime helps! 😉)";
+    submessage =
+      "Nothing's wrong with a little equality, but study more phrases. (Watching anime helps! 😉)";
   } else {
     message = "Not great...";
     submessage =
       "With a bit more effort and attention, you'll get more right next time! 💪";
   }
 
+  useEffect(() => {
+    var user = firebase.auth().currentUser;
+    console.log(user);
+
+    if (user) {
+      db
+        .collection("user-points")
+        .doc(user.uid)
+        .update({
+          correct: props.correct,
+          incorrect: props.incorrect,
+        });
+    }
+  }, [props]);
+
   return (
     <div className="Start">
       <div className="finish-box">
         <h1>{message}</h1>
-
         <span className="scores">
           <div className="corrects">
             Correct:
@@ -327,18 +346,24 @@ function EndPage(props) {
             <span>{props.incorrect}</span>
           </div>
         </span>
-
         <p>{submessage}</p>
-
         <Button
-          onClick={() => {
-            props.startGame();
+          onClick={(e) => {
+            history.push("/");
           }}
           variant="outline-primary"
-          size="lg"
-          block
+          size="md"
         >
-          View Score
+          Checkout the Leaderboard!
+        </Button>
+        <Button
+          onClick={(e) => {
+            window.location.reload(e);
+          }}
+          variant="outline-primary"
+          size="md"
+        >
+          Play Again!
         </Button>
       </div>
     </div>

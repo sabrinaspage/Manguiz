@@ -9,7 +9,7 @@ const LeaderBoard = () => {
   useEffect(() => {
     firebase
       .firestore()
-      .collection("leaders")
+      .collection("user-points")
       .onSnapshot((snapshot) => {
         const newLeaders = snapshot.docs.map((doc) => ({
           id: doc.id,
