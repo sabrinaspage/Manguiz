@@ -31,8 +31,8 @@ const LeaderBoard = () => {
       {leaders ? (
         <table className="content">
           <tbody className="body">
-            {leaders.map((i) => (
-              <LeaderRow person={i} />
+            {leaders.map((i, value) => (
+              <LeaderRow key={value} person={i} />
             ))}
           </tbody>
         </table>
