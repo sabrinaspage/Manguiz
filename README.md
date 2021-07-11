@@ -31,4 +31,4 @@ In the future, we wish to implement more features, some of which being:
 **Team**:
 * sometvguy#9956 - for the incredible concept art and great ideas
 * Simun#1550 - for the epic frontend utilities, the game on the website, the account page, suggesting ideas
-* sabway#0379 - for setting up firebase, registration, login, the leaderboard, frontend tweaks and fixes
+* sabway#0379 - for setting up firebase, registration, login, the leaderboard, choose-a-character, frontend tweaks and fixes
