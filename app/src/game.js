@@ -349,7 +349,7 @@ function EndPage(props) {
         <p>{submessage}</p>
         <Button
           onClick={(e) => {
-            history.push("/");
+            history.push("/leaderboard");
           }}
           variant="outline-primary"
           size="md"
