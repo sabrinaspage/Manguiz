@@ -39,6 +39,7 @@ function NaviBar(props) {
         <Nav.Link href="/game">Play</Nav.Link>
         <Nav.Link href="/leaderboard">Leaderboard</Nav.Link>
         <Nav.Link href="/rewards">Rewards</Nav.Link>
+        <Nav.Link href="/account">Account</Nav.Link>
       </Nav>
       <AccountSection loggedIn={loggedIn} />
     </Navbar>
